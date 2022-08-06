@@ -40,31 +40,11 @@ public class PhoneNumber {
                 }
             }
         }
-        return toPositiveLong(result.toString());
-    }
-
-    /**
-     * Конвертация из String в Long.
-     * @param s Строка содержащая цифры, другие символы при конветрации будут игнорироваться
-     * @return Возвращает результат конвертации строки в положительное число.
-     * Возвращает -1 если количество цифр в строке превышает допустимый диапозон Long.
-     */
-    private static Long toPositiveLong(String s) {
-        Long answer = 0L;
-        Long degree = 1L;
-        final int size = s.length() - 1; // Последний символ в строке
-        if (size >= ACCEPTABLE_NUMBER_LENGTH) {
+        if (result.length() > ACCEPTABLE_NUMBER_LENGTH) {
             return -1L;
+        } else {
+            return Long.parseLong(result.toString());
         }
-        char symbol;
-        for (int i = size; i >= 0; i--) {
-            symbol = s.charAt(i);
-            if (symbol >= '0' && symbol <= '9') {
-                answer += (symbol - 48) * degree;
-                degree *= 10;
-            }
-        }
-        return answer;
     }
 
     /**
